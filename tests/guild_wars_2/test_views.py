@@ -1,4 +1,10 @@
+"""
+tests for views
+"""
 def test_index_ok(client):
+    """
+    checking if the initial index view works properly
+    """
     # Make a GET request to / and store the response object
     # using the Django test client.
     response = client.get('/')
