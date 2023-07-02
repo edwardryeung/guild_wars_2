@@ -47,6 +47,7 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = (
         'status',
         'topics',
+        'popular',
     )
 
     prepopulated_fields = {'slug': ('title',)}

@@ -1,0 +1,60 @@
+{% load static %} <link rel="stylesheet" href="{% static 'blog/base.css' %}"/>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title> Guild Wars 2 for Casuals - {% block page_title %}A GW2 blog{% endblock %}</title>
+</head>
+
+<body>
+    <header id="site-header">
+        <h1>My GW2 Blog</h1>
+        <p>A blog about GW2</p>
+    </header>
+
+    <nav id="top-nav">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Posts</a></li>
+            <li><a href="#">Contacts</a></li>
+        </ul>
+    </nav>
+
+    <main id="main-content">
+        <div>
+            {% block main %}
+            <!-- Content for the main block will be rendered here -->
+            {% endblock %}
+        </div>
+
+        <aside id="sidebar">
+            <section id="author-topic-list">
+                <h3>Authors</h3>
+                <ul>
+                    {% for author in authors %}
+                        <li>{{ author.get_full_name }}</li>
+                    {% endfor %}
+                </ul>
+
+                <h3>Popular Topics</h3>
+                <ul>
+                    {% for topic in sorted_topics %}
+                        <li>{{ topic.name }} ({{ topic.total_posts }})</li>
+                    {% endfor %}
+                    {% for topic in all_topics %}
+                        {% if topic not in sorted_topics %}
+                            <li>{{ topic.name }} (0)</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </section>
+        </aside>
+    </main>
+
+    <footer id="site-footer">
+        Copyright &copy;{% now 'Y' %}
+    </footer>
+</body>
+</html>

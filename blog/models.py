@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-
+from django.contrib.auth import get_user_model
 # Create your models here.
 
 
@@ -22,6 +22,10 @@ class Topic(models.Model):
 class PostQuerySet(models.QuerySet):
     def published(self):
         return self.filter(status=self.model.PUBLISHED)
+
+    def get_authors(self):
+        User = get_user_model()
+        return User.objects.filter(blog_posts__in=self).distinct()
 
 
 class Post(models.Model):
@@ -59,6 +63,9 @@ class Post(models.Model):
         choices=STATUS_CHOICES,
         default=DRAFT,
         help_text='Set to "published" to make this post publicly visible',
+    )
+    popular = models.BooleanField(
+        default=False
     )
     content = models.TextField()
     published = models.DateTimeField(

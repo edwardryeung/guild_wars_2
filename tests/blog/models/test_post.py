@@ -26,3 +26,18 @@ def test_publish_sets_published_to_current_datetime():
     post = baker.make('blog.Post', published=None)
     post.publish()
     assert post.published == dt.datetime(2030, 6, 1, 12, tzinfo=dt.timezone.utc)
+
+
+def test_get_authors_returns_users_who_have_authored_a_post(django_user_model):
+    author = baker.make(django_user_model)
+    baker.make('blog.Post', author=author)
+    baker.make(django_user_model)
+
+    assert list(Post.objects.get_authors()) == [author]
+
+
+def test_get_authors_returns_unique_users(django_user_model):
+    author = baker.make(django_user_model)
+    baker.make('blog.Post', author=author, _quantity=3)
+
+    assert list(Post.objects.get_authors()) == [author]
