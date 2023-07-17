@@ -8,7 +8,7 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-    """third migration""""
+    """third migration"""
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ('blog', '0002_alter_post_options'),
