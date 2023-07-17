@@ -15,9 +15,10 @@
 
     <nav id="top-nav">
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Posts</a></li>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'post-list' %}">Posts</a></li>
+            <li><a href="{% url 'topic-list' %}">Topics</a></li>
             <li><a href="#">Contacts</a></li>
         </ul>
     </nav>
@@ -41,20 +42,23 @@
                 <h3>Popular Topics</h3>
                 <ul>
                     {% for topic in sorted_topics %}
-                        <li>{{ topic.name }} ({{ topic.total_posts }})</li>
+                        <li><a href="{{ topic.get_absolute_url }}">{{ topic.name }} ({{ topic.total_posts }})</a></li>
                     {% endfor %}
                     {% for topic in all_topics %}
                         {% if topic not in sorted_topics %}
-                            <li>{{ topic.name }} (0)</li>
+                            <li><a href="{{ topic.get_absolute_url }}">{{ topic.name }} (0)</a></li>
                         {% endif %}
                     {% endfor %}
+
+                    <u><br><a href="{% url 'topic-list' %}">View all topics</a></u>
                 </ul>
             </section>
         </aside>
     </main>
 
     <footer id="site-footer">
-        Copyright &copy;{% now 'Y' %}
+        Copyright &copy; {% now 'Y' %} –
+        <a href="{% url 'terms-and-conditions' %}">Terms & conditions</a>
     </footer>
 </body>
 </html>

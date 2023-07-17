@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth import get_user_model
+from django.urls import reverse
 # Create your models here.
 
 
@@ -11,6 +12,10 @@ class Topic(models.Model):
         unique=True
     )
     slug = models.SlugField(unique=True)
+
+
+    def get_absolute_url(self):
+        return reverse('topic-detail', kwargs={'slug': self.slug})
 
     def __str__(self):
         return self.name
@@ -79,6 +84,19 @@ class Post(models.Model):
     def publish(self):
         self.status = self.PUBLISHED
         self.published = timezone.now()
+
+    def get_absolute_url(self):
+        if self.published:
+            kwargs = {
+                'year': self.published.year,
+                'month': self.published.month,
+                'day': self.published.day,
+                'slug': self.slug
+            }
+        else:
+            kwargs = {'pk': self.pk}
+
+        return reverse('post-detail', kwargs=kwargs)
 
     class Meta:
         ordering = ['-created']
