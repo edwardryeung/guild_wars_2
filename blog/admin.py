@@ -1,3 +1,6 @@
+"""
+blog admin config
+"""
 from django.contrib import admin
 from . import models
 
@@ -5,6 +8,9 @@ from . import models
 # Register your models here.
 @admin.register(models.Comment)
 class CommentAdmin(admin.ModelAdmin):
+    """
+    admin comment display categories, filter, and search criteria
+    """
     list_display = (
         '__str__',
         'post',
@@ -26,6 +32,9 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 class CommentInline(admin.StackedInline):
+    """
+    admin-side comment formatting under posts
+    """
     model = models.Comment
     extra = 0
     readonly_fields = (
@@ -36,6 +45,9 @@ class CommentInline(admin.StackedInline):
 
 
 class PostAdmin(admin.ModelAdmin):
+    """
+    admin post display categories, filters, and search criteria
+    """
     list_display = (
         'title',
         'author',
@@ -69,6 +81,9 @@ admin.site.register(models.Post, PostAdmin)
 
 @admin.register(models.Topic)
 class TopicAdmin(admin.ModelAdmin):
+    """
+    admin topic display categories
+    """
     list_display = (
         'name',
         'slug',

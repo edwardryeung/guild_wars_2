@@ -13,7 +13,6 @@ class Topic(models.Model):
     )
     slug = models.SlugField(unique=True)
 
-
     def get_absolute_url(self):
         return reverse('topic-detail', kwargs={'slug': self.slug})
 
@@ -29,8 +28,8 @@ class PostQuerySet(models.QuerySet):
         return self.filter(status=self.model.PUBLISHED)
 
     def get_authors(self):
-        User = get_user_model()
-        return User.objects.filter(blog_posts__in=self).distinct()
+        user = get_user_model()
+        return user.objects.filter(blog_posts__in=self).distinct()
 
 
 class Post(models.Model):

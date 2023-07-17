@@ -21,7 +21,8 @@ class Migration(migrations.Migration):
                 ('approved', models.BooleanField()),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('updated', models.DateTimeField(auto_now=True)),
-                ('post', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='blog.post')),
+                ('post', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments',
+                                           to='blog.post')),
             ],
             options={
                 'ordering': ['-created'],

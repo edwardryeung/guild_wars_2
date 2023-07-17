@@ -1,8 +1,14 @@
-from . import models
+"""
+global context
+"""
 from django.db.models import Count
+from . import models
 
 
 def base_context(request):
+    """
+    contexts for the website sidebar
+    """
     authors = models.Post.objects.published().get_authors().order_by('first_name')
 
     top_posts = models.Post.objects.published().filter(comments__approved=True).annotate(
@@ -20,7 +26,6 @@ def base_context(request):
         total_posts=Count('blog_posts')).order_by('-total_posts')
 
     all_topics = models.Topic.objects.all()
-
 
     return {
         'authors': authors,

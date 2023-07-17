@@ -16,11 +16,13 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='post',
             name='author',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='blog_posts', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='blog_posts',
+                                    to=settings.AUTH_USER_MODEL),
         ),
         migrations.AlterField(
             model_name='post',
             name='slug',
-            field=models.SlugField(help_text='the date and time this article was published', unique_for_date='published'),
+            field=models.SlugField(help_text='the date and time this article was published',
+                                   unique_for_date='published'),
         ),
     ]

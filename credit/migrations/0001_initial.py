@@ -19,7 +19,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('score', models.IntegerField()),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='credit_rating', to=settings.AUTH_USER_MODEL)),
+                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='credit_rating',
+                                              to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]

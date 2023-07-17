@@ -13,6 +13,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='post',
             name='status',
-            field=models.CharField(choices=[('draft', 'Draft'), ('published', 'Published')], default='draft', help_text='Set to "published" to make this post publicly visible', max_length=10),
+            field=models.CharField(choices=[('draft', 'Draft'), ('published', 'Published')], default='draft',
+                                   help_text='Set to "published" to make this post publicly visible', max_length=10),
         ),
     ]

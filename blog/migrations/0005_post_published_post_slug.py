@@ -18,6 +18,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='post',
             name='slug',
-            field=models.SlugField(help_text='the date and time this article was published', null=True, unique_for_date='published'),
+            field=models.SlugField(help_text='the date and time this article was published', null=True,
+                                   unique_for_date='published'),
         ),
     ]
