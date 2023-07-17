@@ -4,7 +4,9 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-    "4th migration"
+    """
+    4th migration
+    """
     dependencies = [
         ('blog', '0003_post_author'),
     ]

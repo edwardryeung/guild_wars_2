@@ -4,7 +4,9 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-    """11th migration"""
+    """
+    11th migration
+    """
     dependencies = [
         ('blog', '0010_alter_comment_approved'),
     ]

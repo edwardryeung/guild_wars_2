@@ -4,7 +4,9 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-    """8th migration"""
+    """
+    8th migration
+    """
     dependencies = [
         ('blog', '0007_alter_post_slug'),
     ]

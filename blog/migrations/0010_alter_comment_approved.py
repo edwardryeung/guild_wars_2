@@ -5,7 +5,9 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-    """10 minute migration"""
+    """
+    10 minute migration
+    """
     dependencies = [
         ('blog', '0009_comment'),
     ]
