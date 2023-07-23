@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth import get_user_model
 from django.urls import reverse
+from ckeditor_uploader.fields import RichTextUploadingField
 # Create your models here.
 
 
@@ -71,7 +72,7 @@ class Post(models.Model):
     popular = models.BooleanField(
         default=False
     )
-    content = models.TextField()
+    content = RichTextUploadingField()
     published = models.DateTimeField(
         null=True,
         blank=True,
@@ -79,6 +80,12 @@ class Post(models.Model):
     )
     created = models.DateTimeField(auto_now_add=True)  # This is set on creation
     updated = models.DateTimeField(auto_now=True)  # This gets updated after each save
+
+    banner = models.ImageField(
+        blank=True,
+        null=True,
+        help_text='A banner image for the post'
+    )
 
     def publish(self):
         self.status = self.PUBLISHED
@@ -135,3 +142,31 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text[:50]
+
+
+class Contact(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    email = models.EmailField()
+    message = models.TextField()
+    submitted = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-submitted']
+
+    def __str__(self):
+        return f'{self.submitted.date()}: {self.email}'
+
+
+class PhotoContestSubmission(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    email = models.EmailField()
+    photo = models.ImageField()
+    submitted = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-submitted']
+
+    def __str__(self):
+        return f'{self.submitted.date()}: {self.email}'

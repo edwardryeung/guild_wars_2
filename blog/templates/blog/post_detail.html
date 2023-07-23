@@ -14,6 +14,11 @@
             {% endfor %}
         </ul>
     </span>
-    <section class="content">{{ post.content|linebreaks }}</section>
+    <section class="content">{{ post.content|safe|linebreaks }}</section>
 </article>
+
+{% if post.banner %}
+    <img src="{{ post.banner.url }}" width="100%" alt="Banner image">
+{% endif %}
+
 {% endblock %}

@@ -89,3 +89,54 @@ class TopicAdmin(admin.ModelAdmin):
         'slug',
     )
     prepopulated_fields = {'slug': ('name',)}
+
+
+@admin.register(models.Contact)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = (
+        'email',
+        'last_name',
+        'first_name',
+        'submitted',
+    )
+
+    readonly_fields = (
+        'first_name',
+        'last_name',
+        'email',
+        'message',
+        'submitted',
+    )
+
+
+@admin.register(models.PhotoContestSubmission)
+class PhotoContestSubmissionAdmin(admin.ModelAdmin):
+    list_display = (
+        'email',
+        'last_name',
+        'first_name',
+        'submitted',
+        'photo',
+    )
+
+    readonly_fields = (
+        'first_name',
+        'last_name',
+        'email',
+        'submitted',
+        'photo',
+    )
+
+    list_filter = (
+        'first_name',
+        'last_name',
+        'email',
+        'submitted',
+    )
+
+    search_fields = (
+        'first_name',
+        'last_name',
+        'email',
+        'submitted',
+    )

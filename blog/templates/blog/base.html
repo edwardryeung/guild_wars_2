@@ -8,6 +8,17 @@
 </head>
 
 <body>
+    {% if messages %}
+        <div class="django-messages">
+            {% for message in messages %}
+                <div {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="wrapper">
+
+
     <header id="site-header">
         <h1>My GW2 Blog</h1>
         <p>A blog about GW2</p>
@@ -19,7 +30,8 @@
             <li><a href="{% url 'about' %}">About</a></li>
             <li><a href="{% url 'post-list' %}">Posts</a></li>
             <li><a href="{% url 'topic-list' %}">Topics</a></li>
-            <li><a href="#">Contacts</a></li>
+            <li><a href="{% url 'contest' %}">Photo contest</a></li>
+            <li><a href="{% url 'contact' %}">Contacts</a></li>
         </ul>
     </nav>
 
@@ -60,5 +72,6 @@
         Copyright &copy; {% now 'Y' %} –
         <a href="{% url 'terms-and-conditions' %}">Terms & conditions</a>
     </footer>
+    </div>
 </body>
 </html>

@@ -1,7 +1,9 @@
-from . import models
+from . import models, forms
 from django.views.generic.base import TemplateView
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, FormView, CreateView
+from django.urls import reverse_lazy
+from django.contrib import messages
 # Create your views here.
 
 
@@ -62,3 +64,75 @@ class TopicDetailView(DetailView):
         context['topic'] = self.get_object()
         context['posts'] = models.Post.objects.published().order_by('-published')
         return context
+
+
+def form_example(request):
+    if request.method == 'POST':
+        form = forms.ExampleSignupForm(request.POST)
+
+        if form.is_valid():
+            cleaned_data = form.cleaned_data
+
+            return render(
+                request,
+                'blog/form_example_success.html',
+                context={'data': cleaned_data}
+            )
+
+    else:
+        form = forms.ExampleSignupForm()
+
+    return render(request, 'blog/form_example.html', context={'form': form})
+
+
+class FormViewExample(FormView):
+    template_name = 'blog/form_example.html'
+    form_class = forms.ExampleSignupForm
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            'Thank you for signing up!'
+        )
+        return super().form_valid(form)
+
+
+class ContactFormView(CreateView):
+    model = models.Contact
+    success_url = reverse_lazy('home')
+    fields = [
+        'first_name',
+        'last_name',
+        'email',
+        'message',
+    ]
+
+    def form_valid(self, form):
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            'Thank you! Your message has been sent.'
+        )
+        return super().form_valid(form)
+
+
+class PhotoContestSubmissionFormView(CreateView):
+    model = models.PhotoContestSubmission
+    template_name = 'blog/contest_form.html'
+    success_url = reverse_lazy('home')
+    fields = [
+        'first_name',
+        'last_name',
+        'email',
+        'photo',
+    ]
+
+    def form_valid(self, form):
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            'Thank you! Your photo submission has been received.'
+        )
+        return super().form_valid(form)
