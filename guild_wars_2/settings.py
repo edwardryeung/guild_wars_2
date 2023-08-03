@@ -26,7 +26,9 @@ SECRET_KEY = 'django-insecure-&p!#9k3&&y042vx(^-eje-pu2c9luwpbf4@qb=ei%pd#xymlv&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get('DEBUG', '1'))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [".azurewebsites.net", "127.0.0.1"]
+
+CSRF_TRUSTED_ORIGINS = ["https://*.azurewebsites.net"]
 
 
 # Application definition
@@ -49,6 +51,7 @@ CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -132,3 +135,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
