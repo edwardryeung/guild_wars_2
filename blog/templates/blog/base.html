@@ -1,7 +1,7 @@
 {% load static %} <link rel="stylesheet" href="{% static 'blog/base.css' %}"/>
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8"/>
     <title> Guild Wars 2 for Casuals - {% block page_title %}A GW2 blog{% endblock %}</title>
@@ -32,6 +32,7 @@
             <li><a href="{% url 'topic-list' %}">Topics</a></li>
             <li><a href="{% url 'contest' %}">Photo contest</a></li>
             <li><a href="{% url 'contact' %}">Contacts</a></li>
+            <li><a href="{% url 'comment-list' %}">Comments</a></li>
         </ul>
     </nav>
 
@@ -73,5 +74,9 @@
         <a href="{% url 'terms-and-conditions' %}">Terms & conditions</a>
     </footer>
     </div>
+{% block js %}
+    <script src="{% static 'blog/csrf.js' %}"></script>
+    <script src="{% static 'blog/comments.js' %}"></script>
+{% endblock %}
 </body>
 </html>

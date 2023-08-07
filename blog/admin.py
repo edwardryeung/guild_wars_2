@@ -18,7 +18,8 @@ class CommentAdmin(admin.ModelAdmin):
         'email',
         'created',
         'updated',
-        # 'approved',
+        'likes',
+        'dislikes',
     )
     list_filter = (
         'approved',

@@ -2,8 +2,10 @@ from . import models, forms
 from django.views.generic.base import TemplateView
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, FormView, CreateView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib import messages
+from django.db.models import F
+from django.http import HttpResponseRedirect
 # Create your views here.
 
 
@@ -40,6 +42,32 @@ class TopicListView(ListView):
     queryset = models.Topic.objects.order_by('name')
 
 
+class CommentListView(ListView):
+    model = models.Comment
+    context_object_name = 'comments'
+    queryset = models.Comment.objects.order_by('-created')
+
+
+class CommentDetailView(DetailView):
+    model = models.Comment
+
+
+def comment_like(request, pk):
+    if request.method == 'POST':
+        likedcomment = models.Comment.objects.get(pk=pk)
+        likedcomment.likes = F('likes') + 1
+        likedcomment.save()
+        # return HttpResponseRedirect(reverse('post-detail', args=[str(likedcomment.post_id)]))
+
+
+def comment_dislike(request, pk):
+    if request.method == 'POST':
+        dislikedcomment = models.Comment.objects.get(pk=pk)
+        dislikedcomment.dislikes = F('dislikes') + 1
+        dislikedcomment.save()
+        # return HttpResponseRedirect(reverse('post-detail', args=[str(dislikedcomment.post_id)]))
+
+
 class PostDetailView(DetailView):
     model = models.Post
 
@@ -54,6 +82,11 @@ class PostDetailView(DetailView):
             published__month=self.kwargs['month'],
             published__day=self.kwargs['day'],
         )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comments'] = self.get_object().comments.all
+        return context
 
 
 class TopicDetailView(DetailView):

@@ -1,6 +1,6 @@
 html {
   height: 100%; /* Use whole height of browser */
-  background-color: #111;
+  background-color: #222;
 }
 
 body {
@@ -86,6 +86,10 @@ a:hover {
   text-decoration: none;
   font-weight: bold;
 }
+/* Style the sidebar */
+#sidebar li {
+    color: #999;
+}
 
 /* Style the main content */
 #main-content {
@@ -110,23 +114,25 @@ a:hover {
 }
 
 .post-preview time {
-  color: #800;
+  color: #888;
 }
 
 .post-preview section {
   margin: 1rem 0;
+  color: #888;
 }
 
 /* post detail view */
 #post-detail-article h1 {
   margin-bottom: 0;
   padding-bottom: 0;
+  color: #a00;
 }
 
 #post-detail-article .author {
   font-size: 0.9rem;
   font-weight: bold;
-  color: #555;
+  color: #777;
   padding-bottom: 0;
 }
 
@@ -137,6 +143,10 @@ a:hover {
 
 #post-detail-article .content {
   margin: 2rem 0;
+  padding-bottom: 20;
+  color: #999;
+  border-bottom: 1px solid #777;
+
 }
 
 #post-detail-article .topics ul#taglist {
@@ -150,6 +160,35 @@ a:hover {
 
 #post-detail-article .topics ul#taglist li:not(:last-child):after {
     content: ", ";
+}
+
+#comment {
+  color: #999;
+  padding-top: 20;
+}
+
+#comment h3 {
+  color: #a00;
+}
+
+#comment .author {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #777;
+  padding-bottom: 0;
+}
+
+#comment .published {
+  color: #999;
+  font-size: 0.9rem;
+}
+
+#comment .ratings {
+  color: #a00;
+}
+
+#comment pre {
+  color: #a00
 }
 
 /* Forms */

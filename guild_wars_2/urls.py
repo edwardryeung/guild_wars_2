@@ -19,7 +19,7 @@ from django.urls import path, include
 from blog import views
 from django.conf import settings
 from django.conf.urls.static import static
-
+#from blog.models import Comment
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,4 +36,8 @@ urlpatterns = [
     path('contact/', views.ContactFormView.as_view(), name='contact'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('contest/', views.PhotoContestSubmissionFormView.as_view(), name='contest'),
+    path('comments/', views.CommentListView.as_view(), name='comment-list'),
+    path('comments/<int:pk>/', views.CommentDetailView.as_view(), name='comment-detail'),
+    path('comments/<int:pk>/like/', views.comment_like, name='comment-like'),
+    path('comments/<int:pk>/dislike/', views.comment_dislike, name='comment-dislike'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

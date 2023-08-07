@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-&p!#9k3&&y042vx(^-eje-pu2c9luwpbf4@qb=ei%pd#xymlv&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get('DEBUG', '1'))
 
-ALLOWED_HOSTS = ["gw2doorway.azurewebsites.net", "127.0.0.1"]
+ALLOWED_HOSTS = ["gw2doorway.azurewebsites.net", "127.0.0.1", "localhost"]
 
 CSRF_TRUSTED_ORIGINS = ["https://*.azurewebsites.net"]
 
@@ -86,13 +86,17 @@ WSGI_APPLICATION = 'guild_wars_2.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
+    #'default': {
+    #    'ENGINE': 'django.db.backends.postgresql',
+    #    'NAME': 'postgres',
+    #    'USER': 'edwardryeung', #or the username you picked when creating the Postgres admin
+    #    'PASSWORD': 'slkcf9In@',
+    #    'HOST': 'gw2doorway-postgres-db.postgres.database.azure.com', #should end with postgres.database.azure.com
+    #    'PORT': '5432',
+    #}
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'edwardryeung', #or the username you picked when creating the Postgres admin
-        'PASSWORD': 'slkcf9In@',
-        'HOST': 'gw2doorway-postgres-db.postgres.database.azure.com', #should end with postgres.database.azure.com
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

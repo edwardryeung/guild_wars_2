@@ -1,0 +1,14 @@
+{% extends "blog/base.html" %}
+
+{% block page_title %}Latest comments{% endblock %}
+
+{% block main %}
+<h1>Latest comments</h1>
+
+<ul>
+    {% for comment in comments %}
+        <li><a href="{{ comment.get_absolute_url }}">{{ comment }}</a></li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

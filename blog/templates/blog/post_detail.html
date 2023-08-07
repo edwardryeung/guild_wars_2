@@ -1,4 +1,5 @@
 {% extends "blog/base.html" %}
+{% load static %}
 
 {% block page_title %}{{ post.title }}{% endblock %}
 
@@ -20,5 +21,20 @@
 {% if post.banner %}
     <img src="{{ post.banner.url }}" width="100%" alt="Banner image">
 {% endif %}
+<section id="comment">
+    <h3>Latest comments</h3>
+    {% for comment in comments %}
+        <article>
+            <span class="author">By {{ comment.name }}</span> | <span class="published"><time>{{ comment.created }}</time></span>
 
+            <p>{{ comment.text }}</p>
+                <a href="/comments/{{ comment.pk }}/like/" class="like"><img src="{% static 'blog/thumbsup.png' %}" width="20"></a>
+                {{ comment.likes }}
+                <a href ="/comments/{{ comment.pk }}/dislike/" class="dislike"><img src="{% static 'blog/thumbsdown.png' %}" width="20"></a>
+                {{ comment.dislikes }}
+            <br><br>
+        </article>
+    {% endfor %}
+    <h2><b><pre></pre></b></h2>
+</section>
 {% endblock %}

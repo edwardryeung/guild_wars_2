@@ -132,10 +132,15 @@ class Comment(models.Model):
     approved = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    likes = models.PositiveIntegerField(default=0)
+    dislikes = models.PositiveIntegerField(default=0)
 
     def not_approved(self):
         self.approved = False
         self.save()
+
+    def get_absolute_url(self):
+        return reverse('comment-detail', kwargs={'pk': self.pk})
 
     class Meta:
         ordering = ['-created']

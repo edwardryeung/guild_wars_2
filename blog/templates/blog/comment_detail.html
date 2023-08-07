@@ -1,0 +1,11 @@
+{% extends "blog/base.html" %}
+
+{% block page_title %}{{ comment }}{% endblock %}
+
+{% block main %}
+
+<p>{{ comment.text }}</p>
+<p>Likes: {{ comment.likes }}</p>
+<p>Dislikes: {{ comment.dislikes }}</p>
+
+{% endblock %}
